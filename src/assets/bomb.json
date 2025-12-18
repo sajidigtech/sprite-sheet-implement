@@ -1,0 +1,48 @@
+{
+  "frames": {
+    "blast_0":  { "frame": { "x": 0, "y": 0, "w": 64, "h": 64 } },
+    "blast_1":  { "frame": { "x": 64, "y": 0, "w": 64, "h": 64 } },
+    "blast_2":  { "frame": { "x": 128, "y": 0, "w": 64, "h": 64 } },
+    "blast_3":  { "frame": { "x": 192, "y": 0, "w": 64, "h": 64 } },
+    "blast_4":  { "frame": { "x": 256, "y": 0, "w": 64, "h": 64 } },
+
+    "blast_5":  { "frame": { "x": 0, "y": 64, "w": 64, "h": 64 } },
+    "blast_6":  { "frame": { "x": 64, "y": 64, "w": 64, "h": 64 } },
+    "blast_7":  { "frame": { "x": 128, "y": 64, "w": 64, "h": 64 } },
+    "blast_8":  { "frame": { "x": 192, "y": 64, "w": 64, "h": 64 } },
+    "blast_9":  { "frame": { "x": 256, "y": 64, "w": 64, "h": 64 } },
+
+    "blast_10": { "frame": { "x": 0, "y": 128, "w": 64, "h": 64 } },
+    "blast_11": { "frame": { "x": 64, "y": 128, "w": 64, "h": 64 } },
+    "blast_12": { "frame": { "x": 128, "y": 128, "w": 64, "h": 64 } },
+    "blast_13": { "frame": { "x": 192, "y": 128, "w": 64, "h": 64 } },
+    "blast_14": { "frame": { "x": 256, "y": 128, "w": 64, "h": 64 } },
+
+    "blast_15": { "frame": { "x": 0, "y": 192, "w": 64, "h": 64 } },
+    "blast_16": { "frame": { "x": 64, "y": 192, "w": 64, "h": 64 } },
+    "blast_17": { "frame": { "x": 128, "y": 192, "w": 64, "h": 64 } },
+    "blast_18": { "frame": { "x": 192, "y": 192, "w": 64, "h": 64 } },
+    "blast_19": { "frame": { "x": 256, "y": 192, "w": 64, "h": 64 } },
+
+    "blast_20": { "frame": { "x": 0, "y": 256, "w": 64, "h": 64 } },
+    "blast_21": { "frame": { "x": 64, "y": 256, "w": 64, "h": 64 } },
+    "blast_22": { "frame": { "x": 128, "y": 256, "w": 64, "h": 64 } },
+    "blast_23": { "frame": { "x": 192, "y": 256, "w": 64, "h": 64 } },
+    "blast_24": { "frame": { "x": 256, "y": 256, "w": 64, "h": 64 } }
+  },
+
+  "animations": {
+    "blast": [
+      "blast_0","blast_1","blast_2","blast_3","blast_4",
+      "blast_5","blast_6","blast_7","blast_8","blast_9",
+      "blast_10","blast_11","blast_12","blast_13","blast_14",
+      "blast_15","blast_16","blast_17","blast_18","blast_19",
+      "blast_20","blast_21","blast_22","blast_23","blast_24"
+    ]
+  },
+
+  "meta": {
+    "image": "blast.png",
+    "scale": "1"
+  }
+}
