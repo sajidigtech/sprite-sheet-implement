@@ -1,13 +1,29 @@
 import {Application,Assets,AnimatedSprite,Rectangle,Texture} from "pixi.js"
+// imports of various pixijs classes 
+
 const app = new Application();
+// app object created
+
+
+
 await app.init({
   width: 400,
   height: 400,
   backgroundColor: 0x1099bb,
 });
+// app initiated
+
+
+
 document.getElementById("canvas").appendChild(app.canvas);
-const sheet = await Assets.load("/src/assets/player.json")
-const player = new AnimatedSprite(sheet.animations.run);
+// canvas added to body (canvas id )
+
+
+
+
+
+const playerSheet = await Assets.load("/src/assets/player.json")
+const player = new AnimatedSprite(playerSheet.animations.run);
 player.animationSpeed = 0.40;
 player.loop = true;
 player.play();
@@ -17,19 +33,21 @@ player.y = app.screen.height / 2;
 app.stage.addChild(player);
 
 
-const bombSheet = await Assets.load("/src/assets/bomb.json");
-const bomb = new AnimatedSprite(bombSheet.animations.blast);
-bomb.animationSpeed = 0.5;
-bomb.loop = true;
-bomb.anchor.set(0.5);
-bomb.x = player.x + 40;
-bomb.y = player.y +30;
-// bomb.visible = true;
-bomb.play();
-app.stage.addChild(bomb);
+
+
+const blastSheet = await Assets.load("/src/assets/blast.json");
+const blast = new AnimatedSprite(blastSheet.animations.blast);
+blast.animationSpeed = 0.5;
+blast.loop = true;
+blast.anchor.set(0.5);
+blast.x = player.x + 40;
+blast.y = player.y +30;
+// blast.visible = true;
+blast.play();
+app.stage.addChild(blast);
 
 // global variables
-let isJumping = false; 
+let isJumping = false;
 
 // btns
 
@@ -41,17 +59,17 @@ jumpBtn.addEventListener("click",playerJump)
 
 playBtn.addEventListener("click", () => {
   player.play();
-  bomb.visible = true;
-  bomb.gotoAndPlay(0);
+  blast.visible = true;
+  blast.gotoAndPlay(0);
 });
-// bomb.onComplete = () => {
-//   bomb.visible = false;
+// blast.onComplete = () => {
+//   blast.visible = false;
 // };
 
 stopBtn.addEventListener("click", () => {
   player.stop();
-  bomb.stop();
-  bomb.visible = false
+  blast.stop();
+  blast.visible = false
 });
 
 
