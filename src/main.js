@@ -28,12 +28,16 @@ bomb.y = player.y +30;
 bomb.play();
 app.stage.addChild(bomb);
 
-
+// global variables
+let isJumping = false; 
 
 // btns
 
 const playBtn = document.getElementById("playBtn");
 const stopBtn = document.getElementById("stopBtn");
+const jumpBtn = document.getElementById("jumpBtn");
+
+jumpBtn.addEventListener("click",playerJump)
 
 playBtn.addEventListener("click", () => {
   player.play();
@@ -46,9 +50,27 @@ playBtn.addEventListener("click", () => {
 
 stopBtn.addEventListener("click", () => {
   player.stop();
+  bomb.stop();
+  bomb.visible = false
 });
 
 
-function playerjump(){
-  
+
+
+function playerJump() {
+  if (isJumping) return;   // ignore click if already jumping
+
+  isJumping = true;        // mark as jumping
+  const startY = player.y; // original position
+  const jumpHeight = 50;   // how high
+  const duration = 500;    // total time in ms
+
+  // Move up
+  player.y = startY - jumpHeight;
+
+  // Come back down after half duration
+  setTimeout(() => {
+    player.y = startY;
+    isJumping = false;    // reset flag when landed
+  }, duration / 2);
 }
