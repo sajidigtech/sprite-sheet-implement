@@ -1,4 +1,4 @@
-import {Application,Assets,AnimatedSprite,Rectangle,Texture} from "pixi.js"
+import {Application,Assets,AnimatedSprite,Rectangle,Texture, Sprite, Text} from "pixi.js"
 // imports of various pixijs classes 
 
 const app = new Application();
@@ -19,6 +19,10 @@ document.getElementById("canvas").appendChild(app.canvas);
 // canvas added to body (canvas id )
 
 
+// global variables
+let isJumping = false;
+let score = 0;
+
 
 
 
@@ -31,6 +35,8 @@ player.anchor.set(0.5);
 player.x = app.screen.width / 2;
 player.y = app.screen.height / 2;
 app.stage.addChild(player);
+
+// player sheet for displaying player animation
 
 
 
@@ -46,16 +52,34 @@ blast.y = player.y +30;
 blast.play();
 app.stage.addChild(blast);
 
-// global variables
-let isJumping = false;
+// blast sheet implementation to display blast of bomb
 
-// btns
 
+
+const mineBombTexture = await Assets.load("src/assets/mineBomb.png");
+const mineBomb = new Sprite(mineBombTexture);
+mineBomb.anchor.set(0.5);
+mineBomb.x = app.screen.width / 2 + 50;  // adjust as needed
+mineBomb.y = app.screen.height / 2 + 30;
+mineBomb.scale.set(0.07);
+app.stage.addChild(mineBomb);
+
+// first imported texture and then used as sprites and added to stage
+
+
+
+
+
+
+
+
+// button selection by dom for event handling
 const playBtn = document.getElementById("playBtn");
 const stopBtn = document.getElementById("stopBtn");
 const jumpBtn = document.getElementById("jumpBtn");
 
 jumpBtn.addEventListener("click",playerJump)
+// jumpbtn calls player jump function
 
 playBtn.addEventListener("click", () => {
   player.play();
