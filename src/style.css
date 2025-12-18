@@ -1,0 +1,52 @@
+/* body reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+/* main container center page */
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* full viewport height */
+  gap: 20px;
+}
+
+/* canvas wrapper */
+#canvas {
+  width: 400px;
+  height: 400px;
+  border: 2px solid #333;
+  background-color: #1099bb; /* fallback background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pixi canvas should fill the div */
+#canvas canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* buttons */
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #555;
+}
