@@ -37,6 +37,7 @@ let gameRunning = true;
 
 const playerSheet = await Assets.load("/src/assets/player.json")
 const player = new AnimatedSprite(playerSheet.animations.run);
+player.label = "player";
 player.animationSpeed = 0.40;
 player.loop = true;
 player.play();
@@ -52,6 +53,7 @@ app.stage.addChild(player);
 
 const blastSheet = await Assets.load("/src/assets/blast.json");
 const blast = new AnimatedSprite(blastSheet.animations.blast);
+blast.label = "blast"
 blast.animationSpeed = 0.5;
 blast.loop = true;
 blast.anchor.set(0.5);
@@ -67,6 +69,7 @@ app.stage.addChild(blast);
 
 const mineBombTexture = await Assets.load("src/assets/mineBomb.png");
 const mineBomb = new Sprite(mineBombTexture);
+mineBomb.label = "mineBomb"
 mineBomb.anchor.set(0.5);
 mineBomb.x = app.screen.width + mineBomb.width; // adjust as needed
 mineBomb.y = app.screen.height / 2 + 40;
