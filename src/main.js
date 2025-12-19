@@ -13,7 +13,7 @@ await app.init({
   width: 400,
   height: 400,
   backgroundColor: 0x1099bb,
-  
+
 });
 // app initiated
 globalThis.__PIXI_APP__ = app;
@@ -114,8 +114,7 @@ app.ticker.add(() => {
   // collision AFTER movement
   if (isPlayerHit(player, mineBomb)) {
     gameOver();
-    gameOverPopup.setScore(score);
-    gameOverPopup.container.visible = true;
+
 
   }
 });
@@ -240,12 +239,16 @@ async function gameOver() {
   player.stop();
 
 
+
   blast.visible = true;
   blast.play();
   mineBomb.visible = false;
 
   await new Promise((resolve) => setTimeout(resolve, 1500));
   blast.visible = false;
+  player.visible = false;
+  gameOverPopup.setScore(score);
+  gameOverPopup.container.visible = true;
 
 
 
@@ -266,25 +269,26 @@ function restartGame() {
 
   if (gameRunning) return;
   gameOverPopup.container.visible = false;
+  player.visible = true
 
-  // ✅ reset states
+  // reset states
   gameRunning = true;
   isJumping = false;
   score = 0;
 
-  // ✅ reset score text
+  // reset score text
   scoreText.text = `Score: ${score}`;
 
-  // ✅ reset player
+  // reset player
   player.x = app.screen.width / 2;
   player.y = app.screen.height / 2;
   player.play();
 
-  // ✅ reset blast
+  // reset blast
   blast.stop();
   blast.visible = false;
 
-  // ✅ reset bomb
+  // reset bomb
   mineBomb.visible = true;
   mineBomb.x = app.screen.width + mineBomb.width;
 
