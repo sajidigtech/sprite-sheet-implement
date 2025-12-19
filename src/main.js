@@ -60,11 +60,22 @@ const mineBombTexture = await Assets.load("src/assets/mineBomb.png");
 const mineBomb = new Sprite(mineBombTexture);
 mineBomb.anchor.set(0.5);
 mineBomb.x = app.screen.width / 2 + 50;  // adjust as needed
-mineBomb.y = app.screen.height / 2 + 30;
+mineBomb.y = app.screen.height / 2 + 40;
 mineBomb.scale.set(0.07);
 app.stage.addChild(mineBomb);
 
 // first imported texture and then used as sprites and added to stage
+
+let bombSpeed = 4; // normal speed
+app.ticker.add(() => {
+  // move bomb from right to left
+  mineBomb.x -= bombSpeed??2;
+
+  // jab bomb left side se bahar chala jaye
+  if (mineBomb.x < -mineBomb.width) {
+    mineBomb.x = app.screen.width + mineBomb.width;
+  }
+});
 
 
 
@@ -85,6 +96,7 @@ playBtn.addEventListener("click", () => {
   player.play();
   blast.visible = true;
   blast.gotoAndPlay(0);
+  mineBomb.visible = true
 });
 // blast.onComplete = () => {
 //   blast.visible = false;
@@ -94,7 +106,15 @@ stopBtn.addEventListener("click", () => {
   player.stop();
   blast.stop();
   blast.visible = false
+  mineBomb.visible = false
 });
+
+window.addEventListener("keyup", (e)=>{
+  if (e.code === "Space" || e.code === "ArrowUp") {
+    playerJump();
+  }
+
+})
 
 
 
@@ -104,8 +124,8 @@ function playerJump() {
 
   isJumping = true;        // mark as jumping
   const startY = player.y; // original position
-  const jumpHeight = 50;   // how high
-  const duration = 500;    // total time in ms
+  const jumpHeight = 60;   // how high
+  const duration = 600;    // total time in ms
 
   // Move up
   player.y = startY - jumpHeight;
