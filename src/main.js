@@ -1,4 +1,4 @@
-import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text , TilingSprite} from "pixi.js"
+import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text , TilingSprite, BlurFilter} from "pixi.js"
 // imports of various pixijs classes 
 import { createGameOverPopup } from "./ui/gameOverPopUp";
 
@@ -32,18 +32,22 @@ let isJumping = false;
 let score = 0;
 let gameRunning = true;
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const bgTexture = await Assets.load("/src/assets/gameBG.png");
 const bg = new TilingSprite(bgTexture, app.screen.width, app.screen.height);
 bg.label = "background";
+
+bg.filters = new BlurFilter({strength:3})
+// blur effect 
 
 bg.tileScale.set(0.75,0.75)
 app.stage.addChildAt(bg, 0);
 
 app.ticker.add(() => {
   if (!gameRunning) return;  
-  bg.tilePosition.x -= 5;
+  bg.tilePosition.x -= 4;
 });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -51,7 +55,7 @@ app.ticker.add(() => {
 const playerSheet = await Assets.load("/src/assets/player.json")
 const player = new AnimatedSprite(playerSheet.animations.run);
 player.label = "player";
-player.animationSpeed = 0.40;
+player.animationSpeed = 0.20;
 player.loop = true;
 player.play();
 player.anchor.set(0.5);
