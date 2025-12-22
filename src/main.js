@@ -1,4 +1,4 @@
-import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text } from "pixi.js"
+import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text , TilingSprite} from "pixi.js"
 // imports of various pixijs classes 
 import { createGameOverPopup } from "./ui/gameOverPopUp";
 
@@ -31,6 +31,19 @@ app.stage.addChild(gameOverPopup.container);
 let isJumping = false;
 let score = 0;
 let gameRunning = true;
+
+
+const bgTexture = await Assets.load("/src/assets/gameBG.png");
+const bg = new TilingSprite(bgTexture, app.screen.width, app.screen.height);
+bg.label = "background";
+
+bg.tileScale.set(0.75,0.75)
+app.stage.addChildAt(bg, 0);
+
+app.ticker.add(() => {
+  if (!gameRunning) return;  
+  bg.tilePosition.x -= 5;
+});
 
 
 
@@ -294,3 +307,42 @@ function restartGame() {
 
   console.log("Game Restarted 🚀");
 }
+
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+// pointer on player , hover krne pe player ka kuch popup show hoga esa
+// player.eventMode = 'static';   // 
+// player.cursor = 'pointer';
+
+// // pointer on player
+
+
+// const playerPopup = new Text("Player: Jump with Space ⬆️", {
+//   fontSize: 14,
+//   fill: 0xffffff,
+//   fontWeight: "bold",
+// });
+
+// playerPopup.visible = false;
+// playerPopup.anchor.set(0.5, 1); // bottom center
+// app.stage.addChild(playerPopup);
+
+
+// player.on("pointerover", () => {
+//   playerPopup.visible = true;
+//   playerPopup.x = player.x;
+//   playerPopup.y = player.y - player.height / 2 - 10;
+// });
+
+// player.on("pointerout", () => {
+//   playerPopup.visible = false;
+// });
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------
+
