@@ -1,0 +1,1 @@
+export const soundpath = "/src/assets/sounds";

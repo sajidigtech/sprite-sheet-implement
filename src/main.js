@@ -1,6 +1,9 @@
-import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text , TilingSprite, BlurFilter} from "pixi.js"
+import { Application, Assets, AnimatedSprite, Rectangle, Texture, Sprite, Text , TilingSprite, BlurFilter, NoiseFilter} from "pixi.js"
 // imports of various pixijs classes 
+import { Howl } from "howler";
 import { createGameOverPopup } from "./ui/gameOverPopUp";
+import { soundpath } from "./constants/constant";
+
 
 // pop up for game over
 
@@ -18,6 +21,34 @@ await app.init({
 // app initiated
 globalThis.__PIXI_APP__ = app;
 
+// load audio
+const bgMusic = new Howl({
+  src:[`${soundpath}/gameMusic.mp3`],
+
+  loop: true,
+  volume: 0.4,
+})
+
+// bgMusic.play();
+
+
+const jumpMusic = new Howl({
+  src :[`${soundpath}/jump.mp3`],
+
+  loop:false
+
+})
+
+const explodeMusic = new Howl({
+  src:[`${soundpath}/explode.mp3`]
+})
+
+const gameOverMusic = new Howl({
+  src :[`${soundpath}/gameOver.mp3`]
+})
+
+//
+
 
 
 
@@ -32,12 +63,17 @@ let isJumping = false;
 let score = 0;
 let gameRunning = true;
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const bgTexture = await Assets.load("/src/assets/gameBG.png");
 const bg = new TilingSprite(bgTexture, app.screen.width, app.screen.height);
 bg.label = "background";
 
-bg.filters = new BlurFilter({strength:3})
+
+bg.filters = [
+  // new NoiseFilter({noise:1}),
+  new BlurFilter({strength:1})
+]
 // blur effect 
 
 bg.tileScale.set(0.75,0.75)
@@ -77,7 +113,7 @@ blast.anchor.set(0.5);
 blast.x = player.x + 40;
 blast.y = player.y + 30;
 blast.visible = false;
-// blast.play();
+blast.play();
 app.stage.addChild(blast);
 
 // blast sheet implementation to display blast of bomb
@@ -163,10 +199,15 @@ playBtn.addEventListener("click", () => {
 // };
 
 stopBtn.addEventListener("click", () => {
-  player.stop();
-  blast.stop();
-  blast.visible = false
-  mineBomb.visible = false
+  // player.stop();
+  // blast.stop();
+  // blast.visible = false
+  // mineBomb.visible = false;
+
+  bgMusic.stop();
+  jumpMusic.stop();
+  gameOverMusic.stop();
+  explodeMusic.stop();
 });
 
 restartBtn.addEventListener("click", restartGame)
@@ -188,6 +229,8 @@ function playerJump() {
   const startY = player.y; // original position
   const jumpHeight = 100;   // how high
   const duration = 1000;    // total time in ms
+
+  // jumpMusic.play();
 
   // Move up
   player.y = startY - jumpHeight;
@@ -254,12 +297,16 @@ async function gameOver() {
   gameRunning = false;
 
   player.stop();
+  bgMusic.stop();
+  // explodeMusic.play();
 
 
 
   blast.visible = true;
-  blast.play();
+  // blast.play();
   mineBomb.visible = false;
+
+  // gameOverMusic.play();
 
   await new Promise((resolve) => setTimeout(resolve, 1500));
   blast.visible = false;
@@ -287,6 +334,8 @@ function restartGame() {
   if (gameRunning) return;
   gameOverPopup.container.visible = false;
   player.visible = true
+
+  // bgMusic.play();
 
   // reset states
   gameRunning = true;
